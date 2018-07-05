@@ -28,11 +28,31 @@ class SelfCheckout
 	end
 
 	def validate_input(input)
-		while /\D/.match(input)
+		while /\D/.match(input) # /\^yn/.match(answer)
 			puts "Please enter a valid number"
 			input = gets.chomp 
 		end
 	end
+
+	def validate_decision(answer)
+		valid_moves = ["Y", "N"]
+		valid_moves.include?(answer)
+	end
+
+
+	def checkout_decision
+		puts " Do you want to checkout? (Y/N)"
+		answer = gets.chomp.upcase
+		while !validate_decision(answer)
+			puts "Please enter a valid response"
+			answer = gets.chomp.upcase
+			#checkout_decision
+		end
+
+		answer
+		
+	end
+
 
 	def checkout_cart
 		answer = "N"
@@ -40,17 +60,19 @@ class SelfCheckout
 			get_item
 		 	get_price 
 			get_quantity
+
+
 			
-			while @quantity > 0
+			while @quantity > 0. 
 				item = Item.new(@item_name, @price)
 				@basket.items_added(item)
-				@quantity -= 1
+				@quantity -= 1. # this part of code takes items and aass it to the basket
 			end
-			puts " Do you want to checkout? (Y/N)"
-			answer = gets.chomp
-
-		
+			answer = checkout_decision. # the value of answer from the checkout_decision method 
+			
+			
 		end
+
 		calculated_total
 		
 	end	
